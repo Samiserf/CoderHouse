@@ -15,7 +15,7 @@ h1{
 }
 
 
-button{
+.NavBar button, .shadow button{
     margin-right: 100px;
     border:none;
     background: none !important;

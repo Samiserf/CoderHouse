@@ -5,37 +5,50 @@ import {
     Link, NavLink,useParams
   } from "react-router-dom";
 import Button from '../Button/button'
+import Loading from './../../images/loading.gif'
 
 
 
 function CountryDetail(props) {
 
     const [desc,setDesc] = useState([]);
-    const [descBorder,setDescBorder] = useState([]);
-    const [descCurrencies,setdescCurrencies] = useState([]);
-    const [descLenguages,setdescLanguages] = useState([]);
+    const [countItem,setCountItem] = useState(0);
+    //state loading
+    const [loading,setLoading] = useState(true);
 
     let { id } = props.match.params;
 
     useEffect( () => { 
-    
 
-        fetch(`https://restcountries.eu/rest/v2/alpha/${id}`)
-        
-  
-        .then(response => {return response.json() })
-  
-        .then(response => {
-  
-            setDesc(response);
-            setDescBorder(response.borders);
-            setdescCurrencies(response["currencies"][0]);
-            setdescLanguages(response["languages"]);
-            
-        })
+
+        const task = new Promise((resolve, reject) => {
+
+            setTimeout( () => {
+      
+              const data =fetch(`https://api.mercadolibre.com/items/${id}`)
+              resolve(data);
+              console.log(data)
+            },1000);
+      
+          });
+          task.then((response) => {return response.json() })
+          .then(response => {
+            setDesc(response)
+            setLoading(false)
+          });
+    
     },[id]);
 
-    console.log(descLenguages);
+    function HandleIncrease(){
+        setCountItem(countItem+1)
+    }
+    function HandleDecrease(){
+        setCountItem(countItem-1)
+    }
+
+    if(loading){
+        return <div className="container-loading"><img src={Loading} className="loading"></img></div>
+      }else{
 
     return (
 
@@ -46,32 +59,33 @@ function CountryDetail(props) {
             <div className="content-CartList">
 
                     <div className="flag">
-                        <img src={desc.flag}></img>
+                        <img src={desc.thumbnail}></img>
                     </div>
 
                     <div className="description-country">
                         <h1>{desc.name}</h1>
                         <div className="info-country">
                             <div className="tags_info_countries">
-                                <p>Native Name: <span>{desc.nativeName}</span></p>
-                                <p>Population: <span>{desc.population}</span></p>
-                                <p>Region: <span>{desc.region}</span></p>
-                                <p>Sub Region: <span>{desc.subRegion}</span></p>
-                                <p>Capital: <span>{desc.capital}</span></p>
+                                <p>Titulo: <span>{desc.title}</span></p>
+                                <p>Precio: <span>{desc.currency_id} {desc.price}</span></p>
+                                <p>MercadoPago: <span>{desc.accepts_mercadopago}</span></p>
+                                <p>Garantía: <span>{desc.warranty}</span></p>
+                                <p>Cantidad a comprar: {countItem}</p>
                             </div>
                             <div>
-                                <p>Top Level Domain: <span>{desc.topLevelDomain}</span></p>
-                                <p>Top Level Domain: <span>{descCurrencies.name}</span></p>
-                                <p>Currencies : {descLenguages.map( item => ( <span>{item.name},</span> ))}</p>
+                                <p>Última edición: <span>{desc.last_updated}</span></p>
+                                
                             </div>
                         </div>
                         <div className="around-countries">
-                            <p>Border Countries:</p>
+                        <button onClick={HandleDecrease}>-</button><button>Comprar</button> <button onClick={HandleIncrease}>+</button>
+                            {/* <p>Relacionados:</p>
                             <div className="List-countries-around">
                                 {descBorder.map( (border,i) => (
                                     <Button path="pais/" id={border} text={border} />
                                     ) )}
-                            </div>
+                                    TO DO
+                            </div> */}
                             
                         </div>
                     </div>
@@ -79,6 +93,7 @@ function CountryDetail(props) {
             
       </div>
     );
+    }
   }
   
   export default CountryDetail;

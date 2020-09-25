@@ -33,7 +33,6 @@
 .content-CartList .description-country{
     display: flex;
     flex-direction: column;
-    width: 50%;
 }
 
 .content-CartList .description-country .info-country{
@@ -77,15 +76,7 @@
     flex-wrap: wrap;
 }
 
-.content-CartList .description-country .around-countries .List-countries-around button{
-    width: 100px;
-    height: 29px;
-    font-size: 14px;
-    box-shadow: none;
-    outline: none;
-    border: none;
-    text-decoration: none;
-}
+
 
 @media(max-width: 800px) {
 

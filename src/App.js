@@ -11,6 +11,10 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import {CartProvider} from './Context/CartContext'
+import Loading from './images/loading.gif'
+
+
 
 function App() {
 
@@ -18,19 +22,25 @@ function App() {
 
   const [data, setData] = useState([]);
   const [theme, settheme] = useState(true);
+  const [loading,setLoading] = useState(true);
 
   useEffect( () => { 
 
-      fetch("https://restcountries.eu/rest/v2/all")
-      
+    const task = new Promise((resolve, reject) => {
 
-      .then(response => {return response.json() })
+      setTimeout( () => {
 
-      .then(response => {
+        const data = fetch("https://api.mercadolibre.com/sites/MLA/search?category=MLA1055")
+        resolve(data);
+        console.log(data)
+      },3000);
 
-          setData(response)
-
-      })
+    });
+    task.then((response) => {return response.json() })
+    .then(response => {
+      setData(response.results)
+      setLoading(false)
+    });
 
   },[]);
 
@@ -41,28 +51,30 @@ function App() {
     
   } 
 
-  return (
-    <div className={theme ? "App" : "App-dark"}>
-      <Router>
+if(loading){
+  return <div className="container-loading"><img src={Loading} className="loading"></img></div>
+}else{
 
-        <NavBar changeTheme={changeTheme}/>
-        <switch>
-          <Route exact path="/">
-            <FiltroHome updateData={setData} data={data}/>
-            <CartList data={data}/>  
-          </Route>
-          <Route exact path="/pais/:id" component={CountryDetail}/>
-        </switch>
+    return (
+      <div className={theme ? "App" : "App-dark"}>
+        <Router>
+          <CartProvider>
+            <NavBar changeTheme={changeTheme}/>
+          </CartProvider>
+          <switch>
+            <Route exact path="/">
+              <FiltroHome updateData={setData} data={data}/>
+              <CartProvider>
+              < CartList data={data}/>
+              </CartProvider>  
+            </Route>
+            <Route exact path="/pais/:id" component={CountryDetail}/>
+          </switch>
 
-      </Router>
-
-        
-
-        
-
-
-    </div>
-  );
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;

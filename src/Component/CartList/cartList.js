@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './cartList.css';
 import {
     BrowserRouter as 
     Link, NavLink
   } from "react-router-dom";
-
+import Button from '../Button/button'
+import {CartContext} from '../../Context/CartContext'
 
 function CartList(props) {
 
+    
+
+    const [cart,setCart] = useContext(CartContext);
+
+    function increaseCart(){
+        setCart(currentCart =>  cart+1)
+        // setCart(cart+1)
+    }
 
 
     return (
@@ -16,20 +25,29 @@ function CartList(props) {
             <div className="container">
                 <div className="grid-row">
                     {props.data.map( (pais, i) =>
-                        <NavLink to={`/pais/${pais.alpha2Code }`} className="grid-item" key={i}>
+                    <>
+                        
                                     <div className="grid-item-wrapper">
+                                    <NavLink to={`/pais/${pais.id }`} className="grid-item" key={i}>
                                         <div className="imagenPais">
-                                            <img style={{backgroundImage : `url(${pais.flag})`}}></img>
+                                            <img style={{backgroundImage : `url(${pais.thumbnail})`}}></img>
                                         </div>
                                         <div className="description-country">
-                                            <h3>{pais.name}</h3>
+                                            <h3>{pais.title}</h3>
 
-                                            <p>Population: <span>{pais.population}</span></p>
-                                            <p>Region: <span>{pais.region}</span></p>
-                                            <p>Capital: <span>{pais.capital}</span></p>
+                                            <p>Precio $: <span>{pais.price}</span></p>
+                                            <p>Condicion: <span>{pais.condition}</span></p>
+                                            {/* <p>Capital: <span>{pais.capital}</span></p> */}
                                         </div>
+                                    </NavLink>
+                                        <button className="cart" onClick={increaseCart}>
+                                            AGREGAR AL CARRITO
+                                        </button>
+                                        
                                     </div>
-                        </NavLink>
+                        
+                        
+                    </>
                     )}
                 </div>
             </div>

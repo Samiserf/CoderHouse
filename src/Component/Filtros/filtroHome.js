@@ -26,7 +26,7 @@ function FiltroHome(props) {
 
       if(e.target.value == '' | e.target.value == '  '){e.preventDefault(); e.stopPropagation();}
       else{
-      fetch(`https://restcountries.eu/rest/v2/name/${e.target.value}`)
+      fetch(`https://api.mercadolibre.com/sites/MLA/search?q=${e.target.value}`)
 
       .then(response => {return response.json() })
 
@@ -35,7 +35,7 @@ function FiltroHome(props) {
               setBandera(false);
               props.updateData([]);
             }else{
-              props.updateData(response)
+              props.updateData(response.results)
             }
       })
     }
