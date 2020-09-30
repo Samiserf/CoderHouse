@@ -1,6 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './nav.css';
 import {CartContext} from '../../Context/CartContext'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 
 function NavBar(props) {
@@ -8,7 +14,7 @@ function NavBar(props) {
   const [shadow,setShadow] = useState(false);
   const [cart] = useContext(CartContext);
 
-
+  console.log("nav = " +cart);
 
   useEffect( () => {
 
@@ -28,11 +34,12 @@ function NavBar(props) {
     console.log("asd")
   },[cart])
 
-    console.log("nav:"+ cart)
     return (
       <div className={shadow ? "shadow" : "NavBar"}>
         
-    <i class="fa fa-shopping-cart"><sup>{<CartContext.Consumer>{context => {return cart}}</CartContext.Consumer>}</sup></i>
+
+        <Link to="/cart"><i class="fa fa-shopping-cart"><sup>{cart.length}</sup></i></Link>
+
         <button onClick={props.changeTheme}><i class="fa fa-moon-o" aria-hidden="true"></i> Black mode</button>
       </div>
     );

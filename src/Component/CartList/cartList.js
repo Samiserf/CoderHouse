@@ -4,7 +4,6 @@ import {
     BrowserRouter as 
     Link, NavLink
   } from "react-router-dom";
-import Button from '../Button/button'
 import {CartContext} from '../../Context/CartContext'
 
 function CartList(props) {
@@ -13,10 +12,27 @@ function CartList(props) {
 
     const [cart,setCart] = useContext(CartContext);
 
-    function increaseCart(){
-        setCart(currentCart =>  cart+1)
-        // setCart(cart+1)
+    function increaseCart(id){
+
+        const task = new Promise((resolve, reject) => {
+
+           
+      
+              const data =fetch(`https://api.mercadolibre.com/items/${id}`)
+              resolve(data);
+      
+          });
+          task.then((response) => {return response.json() })
+          .then(response => {
+            setCart([...cart, response])
+          });
+
     }
+    
+
+    useEffect(() => {
+        console.log(cart);
+    }, [cart])
 
 
     return (
@@ -24,11 +40,11 @@ function CartList(props) {
 
             <div className="container">
                 <div className="grid-row">
-                    {props.data.map( (pais, i) =>
+                    {props.data.map( (pais, index) =>
                     <>
                         
                                     <div className="grid-item-wrapper">
-                                    <NavLink to={`/pais/${pais.id }`} className="grid-item" key={i}>
+                                    <NavLink to={`/pais/${pais.id }`} className="grid-item" key={index}>
                                         <div className="imagenPais">
                                             <img style={{backgroundImage : `url(${pais.thumbnail})`}}></img>
                                         </div>
@@ -40,12 +56,11 @@ function CartList(props) {
                                             {/* <p>Capital: <span>{pais.capital}</span></p> */}
                                         </div>
                                     </NavLink>
-                                        <button className="cart" onClick={increaseCart}>
+                                        <button className="cart" onClick={() => increaseCart(pais.id)}>
                                             AGREGAR AL CARRITO
                                         </button>
                                         
                                     </div>
-                        
                         
                     </>
                     )}

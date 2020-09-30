@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 import {CartProvider} from './Context/CartContext'
 import Loading from './images/loading.gif'
+import Cart from './Component/Cart/cart'
 
 
 
@@ -60,16 +61,18 @@ if(loading){
         <Router>
           <CartProvider>
             <NavBar changeTheme={changeTheme}/>
-          </CartProvider>
+         
           <switch>
             <Route exact path="/">
               <FiltroHome updateData={setData} data={data}/>
-              <CartProvider>
+              
               < CartList data={data}/>
-              </CartProvider>  
+              
             </Route>
             <Route exact path="/pais/:id" component={CountryDetail}/>
+            <Route exact path="/cart" component={Cart}/>
           </switch>
+          </CartProvider>  
 
         </Router>
       </div>

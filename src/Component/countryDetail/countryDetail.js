@@ -39,12 +39,12 @@ function CountryDetail(props) {
     
     },[id]);
 
-    function HandleIncrease(){
-        setCountItem(countItem+1)
-    }
-    function HandleDecrease(){
-        setCountItem(countItem-1)
-    }
+    // function HandleIncrease(){
+    //     setCountItem(countItem+1)
+    // }
+    // function HandleDecrease(){
+    //     setCountItem(countItem-1)
+    // }
 
     if(loading){
         return <div className="container-loading"><img src={Loading} className="loading"></img></div>
@@ -70,7 +70,6 @@ function CountryDetail(props) {
                                 <p>Precio: <span>{desc.currency_id} {desc.price}</span></p>
                                 <p>MercadoPago: <span>{desc.accepts_mercadopago}</span></p>
                                 <p>Garantía: <span>{desc.warranty}</span></p>
-                                <p>Cantidad a comprar: {countItem}</p>
                             </div>
                             <div>
                                 <p>Última edición: <span>{desc.last_updated}</span></p>
@@ -78,7 +77,8 @@ function CountryDetail(props) {
                             </div>
                         </div>
                         <div className="around-countries">
-                        <button onClick={HandleDecrease}>-</button><button>Comprar</button> <button onClick={HandleIncrease}>+</button>
+                        {/* <button onClick={HandleDecrease}>-</button><button>Comprar </button> <button onClick={HandleIncrease}>+</button> */}
+                        {/* <button onClick={HandleDecrease}>-</button><button>Comprar <strong>{countItem}</strong></button> <button onClick={HandleIncrease}>+</button> */}
                             {/* <p>Relacionados:</p>
                             <div className="List-countries-around">
                                 {descBorder.map( (border,i) => (

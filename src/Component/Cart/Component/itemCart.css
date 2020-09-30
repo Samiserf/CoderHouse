@@ -1,0 +1,38 @@
+.product-cart{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    width: 90%;
+    border-bottom: 1px solid #929292;
+    padding: 10px 0px 10px 0px;
+}
+
+.product-cart img{
+    width: 100px;
+    height: 100px;
+}
+
+h3{
+    color:black;
+}
+
+
+.info-left{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    flex-direction: row;
+    width: 30%;
+    background: red;
+}
+
+.info-right{
+    display: flex;
+    align-items: center;
+    justify-content:flex-end; 
+    flex-direction: row;
+    width: 30%;
+    background: blue;
+}
+
