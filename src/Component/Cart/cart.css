@@ -5,8 +5,8 @@
     min-height: 100vh;
 }
 
-.bg .container{
-    background: white;
+.bg .container-cart{
+    background: hsl(209, 23%, 22%);
     min-width: 80%;
     min-height: 450px;
     display: flex;
@@ -15,6 +15,6 @@
     align-items: center;
 }
 
-.bg .container h2{
-    color: #000;
+.bg .container-cart h2{
+    /* color: #000; */
 }

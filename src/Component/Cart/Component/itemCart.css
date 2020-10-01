@@ -13,6 +13,12 @@
     height: 100px;
 }
 
+.description{
+    display: flex;
+    flex-direction: column;
+    vertical-align: center;
+}
+
 h3{
     color:black;
 }
@@ -24,7 +30,6 @@ h3{
     justify-content: left;
     flex-direction: row;
     width: 30%;
-    background: red;
 }
 
 .info-right{
@@ -33,6 +38,7 @@ h3{
     justify-content:flex-end; 
     flex-direction: row;
     width: 30%;
-    background: blue;
+    padding-left: 10px;
 }
+
 

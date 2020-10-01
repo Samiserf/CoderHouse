@@ -12,7 +12,7 @@ function Cart() {
 
           <div className="bg">
                 
-                <div className="container">
+                <div className="container-cart">
                   <h2>Carrito de Compras</h2>
                   <ItemCart/>
                 </div>

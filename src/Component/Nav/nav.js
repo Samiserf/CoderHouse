@@ -5,7 +5,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  NavLink
 } from "react-router-dom";
 
 
@@ -38,7 +38,7 @@ function NavBar(props) {
       <div className={shadow ? "shadow" : "NavBar"}>
         
 
-        <Link to="/cart"><i class="fa fa-shopping-cart"><sup>{cart.length}</sup></i></Link>
+        <NavLink className="carrito-fafa" to="/cart"><i class="fa fa-shopping-cart"><sup>{cart.length}</sup></i></NavLink>
 
         <button onClick={props.changeTheme}><i class="fa fa-moon-o" aria-hidden="true"></i> Black mode</button>
       </div>

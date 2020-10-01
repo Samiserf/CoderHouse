@@ -39,6 +39,9 @@ h1{
     transition: all 3s ease;
 }
 
+.carrito-fafa{
+    color:white;
+}
 
 @media(max-width: 500px) {
     .NavBar h1{
