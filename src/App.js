@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import NavBar from './Component/Nav/nav'
@@ -14,34 +14,37 @@ import {
 import {CartProvider} from './Context/CartContext'
 import Loading from './images/loading.gif'
 import Cart from './Component/Cart/cart'
-
-
+import {getFirestore} from './Firebase/index'
 
 function App() {
 
-  
+  const [data, setData] = useState([]); 
 
-  const [data, setData] = useState([]);
   const [theme, settheme] = useState(true);
   const [loading,setLoading] = useState(true);
 
   useEffect( () => { 
+        const db = getFirestore();
+        const itemColection = db.collection('items');
+        // const data = fetch("https://api.mercadolibre.com/sites/MLA/search?category=MLA1055")
+        // resolve(data);
+        // console.log(data)
 
-    const task = new Promise((resolve, reject) => {
-
-      setTimeout( () => {
-
-        const data = fetch("https://api.mercadolibre.com/sites/MLA/search?category=MLA1055")
-        resolve(data);
-        console.log(data)
-      },3000);
-
-    });
-    task.then((response) => {return response.json() })
-    .then(response => {
-      setData(response.results)
-      setLoading(false)
-    });
+    itemColection.get()
+    .then((response) => {
+        if(response.size == 0 ){
+          console.log("NO HAY DATA");
+        }
+        else{
+          setData(response.docs.map( (doc) => {return({id:doc.id,...doc.data()});
+        }))
+        }
+     })
+     .catch ( (error) => {console.log("Algo fallo", error);} )
+     .finally( () => {
+        setLoading(false)
+     } )
+      
 
   },[]);
 
@@ -60,18 +63,15 @@ if(loading){
       <div className={theme ? "App" : "App-dark"}>
         <Router>
           <CartProvider>
-            <NavBar changeTheme={changeTheme}/>
-         
-          <switch>
-            <Route exact path="/">
-              <FiltroHome updateData={setData} data={data}/>
-              
-              < CartList data={data}/>
-              
-            </Route>
-            <Route exact path="/pais/:id" component={CountryDetail}/>
-            <Route exact path="/cart" component={Cart}/>
-          </switch>
+              <NavBar changeTheme={changeTheme}/>
+                <switch>
+                  <Route exact path="/">
+                    <FiltroHome updateData={setData} data={data}/>
+                    < CartList data={data}/>
+                  </Route>
+                  <Route exact path="/pais/:id" component={CountryDetail}/>
+                  <Route exact path="/cart" component={Cart}/>
+                </switch>
           </CartProvider>  
 
         </Router>

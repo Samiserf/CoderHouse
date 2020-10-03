@@ -6,6 +6,7 @@ import {
   } from "react-router-dom";
 import Button from '../Button/button'
 import Loading from './../../images/loading.gif'
+import {getFirestore} from '../../Firebase/index'
 
 
 
@@ -18,33 +19,40 @@ function CountryDetail(props) {
 
     let { id } = props.match.params;
 
+    
+
     useEffect( () => { 
+        console.log(id);
+        const db = getFirestore();
+        const itemDoc = db.collection('items');
+        const itemColection = itemDoc.doc(id);
+        // const itemId = itemColection.where('{docs.id}', '==', 'nuevo');
 
+        itemColection.get()
+        .then((doc) => {
+            if(!doc.exists){
 
-        const task = new Promise((resolve, reject) => {
-
-            setTimeout( () => {
-      
-              const data =fetch(`https://api.mercadolibre.com/items/${id}`)
-              resolve(data);
-              console.log(data)
-            },1000);
-      
-          });
-          task.then((response) => {return response.json() })
-          .then(response => {
-            setDesc(response)
+                console.log("No existe el documento");
+            }
+            else{
+                console.log("Item encontrado");
+                setDesc({id: doc.id, ...doc.data()});
+                console.log(desc);
+            }
+        })
+        .catch ( (error) => {console.log("Algo fallo", error);} )
+        .finally( () => {
             setLoading(false)
-          });
+        } )
     
     },[id]);
 
-    // function HandleIncrease(){
-    //     setCountItem(countItem+1)
-    // }
-    // function HandleDecrease(){
-    //     setCountItem(countItem-1)
-    // }
+    function HandleIncrease(){
+        setCountItem(countItem+1)
+    }
+    function HandleDecrease(){
+        setCountItem(countItem-1)
+    }
 
     if(loading){
         return <div className="container-loading"><img src={Loading} className="loading"></img></div>
@@ -67,18 +75,19 @@ function CountryDetail(props) {
                         <div className="info-country">
                             <div className="tags_info_countries">
                                 <p>Titulo: <span>{desc.title}</span></p>
-                                <p>Precio: <span>{desc.currency_id} {desc.price}</span></p>
-                                <p>MercadoPago: <span>{desc.accepts_mercadopago}</span></p>
-                                <p>Garantía: <span>{desc.warranty}</span></p>
+                                <p>Precio: $<span>{desc.price}</span></p>
+                                <p>Condicion: <span>{desc.condition}</span></p>
+                                <p>Stock: <span>{desc.stock}</span></p>
                             </div>
                             <div>
-                                <p>Última edición: <span>{desc.last_updated}</span></p>
+                                <p>Garantia: <span>{desc.garantia}</span></p>
+                                <p>Color: <span>{desc.color}</span></p>
                                 
                             </div>
                         </div>
                         <div className="around-countries">
                         {/* <button onClick={HandleDecrease}>-</button><button>Comprar </button> <button onClick={HandleIncrease}>+</button> */}
-                        {/* <button onClick={HandleDecrease}>-</button><button>Comprar <strong>{countItem}</strong></button> <button onClick={HandleIncrease}>+</button> */}
+                        <button onClick={HandleDecrease}>-</button><button>Comprar <strong>{countItem}</strong></button> <button onClick={HandleIncrease}>+</button>
                             {/* <p>Relacionados:</p>
                             <div className="List-countries-around">
                                 {descBorder.map( (border,i) => (

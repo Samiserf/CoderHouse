@@ -23,6 +23,24 @@ h3{
     color:black;
 }
 
+.link{
+    color: #0055ac;
+}
+
+.info-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.info-center button{
+    width: 35px;
+    height: 35px;
+    margin: 20px;
+}
+
 
 .info-left{
     display: flex;
@@ -33,12 +51,23 @@ h3{
 }
 
 .info-right{
+    text-align: left;
     display: flex;
     align-items: center;
     justify-content:flex-end; 
-    flex-direction: row;
+    flex-direction: column;
     width: 30%;
     padding-left: 10px;
 }
 
+.final_buy{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
 
+.line-cut{
+    margin: 10px auto;
+    width: 70%;
+    border-bottom: 1px solid #a4a4a4;
+}

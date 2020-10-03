@@ -40,23 +40,23 @@ function CartList(props) {
 
             <div className="container">
                 <div className="grid-row">
-                    {props.data.map( (pais, index) =>
+                    {props.data.map( (item, index) =>
                     <>
                         
                                     <div className="grid-item-wrapper">
-                                    <NavLink to={`/pais/${pais.id }`} className="grid-item" key={index}>
+                                    <NavLink to={`/pais/${item.id }`} className="grid-item" key={index}>
                                         <div className="imagenPais">
-                                            <img style={{backgroundImage : `url(${pais.thumbnail})`}}></img>
+                                            <img style={{backgroundImage : `url(${item.image})`}}></img>
                                         </div>
                                         <div className="description-country">
-                                            <h3>{pais.title}</h3>
+                                            <h3>{item.title}</h3>
 
-                                            <p>Precio $: <span>{pais.price}</span></p>
-                                            <p>Condicion: <span>{pais.condition}</span></p>
+                                            <p>Precio $: <span>{item.price}</span></p>
+                                            <p>Condicion: <span>{item.condition}</span></p>
                                             {/* <p>Capital: <span>{pais.capital}</span></p> */}
                                         </div>
                                     </NavLink>
-                                        <button className="cart" onClick={() => increaseCart(pais.id)}>
+                                        <button className="cart" onClick={() => increaseCart(item.id)}>
                                             AGREGAR AL CARRITO
                                         </button>
                                         

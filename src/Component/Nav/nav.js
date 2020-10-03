@@ -36,8 +36,8 @@ function NavBar(props) {
 
     return (
       <div className={shadow ? "shadow" : "NavBar"}>
-        
 
+        <NavLink to="/"><h1>Ecommerce</h1></NavLink>
         <NavLink className="carrito-fafa" to="/cart"><i class="fa fa-shopping-cart"><sup>{cart.length}</sup></i></NavLink>
 
         <button onClick={props.changeTheme}><i class="fa fa-moon-o" aria-hidden="true"></i> Black mode</button>
