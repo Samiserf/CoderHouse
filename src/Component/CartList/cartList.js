@@ -4,7 +4,8 @@ import {
     BrowserRouter as 
     Link, NavLink
   } from "react-router-dom";
-import {CartContext} from '../../Context/CartContext'
+import {CartContext} from '../../Context/CartContext';
+import {getFirestore} from '../../Firebase/index';
 
 function CartList(props) {
 
@@ -14,25 +15,26 @@ function CartList(props) {
 
     function increaseCart(id){
 
-        const task = new Promise((resolve, reject) => {
+        const db = getFirestore();
+        const itemDoc = db.collection('items');
+        const itemColection = itemDoc.doc(id);
+        // const itemId = itemColection.where('{docs.id}', '==', 'nuevo');
 
-           
-      
-              const data =fetch(`https://api.mercadolibre.com/items/${id}`)
-              resolve(data);
-      
-          });
-          task.then((response) => {return response.json() })
-          .then(response => {
-            setCart([...cart, response])
-          });
+        itemColection.get()
+        .then((doc) => {
+            if(!doc.exists){
+
+                console.log("No existe el documento");
+            }
+            else{
+                setCart([...cart,{id: doc.id, ...doc.data()}]);
+            }
+        })
+        .catch ( (error) => {console.log("Algo fallo", error);} )
+
 
     }
-    
 
-    useEffect(() => {
-        console.log(cart);
-    }, [cart])
 
 
     return (

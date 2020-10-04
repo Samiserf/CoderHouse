@@ -2,42 +2,33 @@ import React, { useState } from 'react';
 import './filtroHome.css';
 import NotFound from '../../images/3747371.jpg'
 import Input from '../Input/input'
-
+import {getFirestore} from '../../Firebase/index'
 
 function FiltroHome(props) {
 
   const [bandera,setBandera] = useState(true)
 
-  // function compareVowel(letra){
-  //   const notAllowedChars = new RegExp('[a | e | i | o | u]');
-  //   if(notAllowedChars.test(letra)){
-  //     return true;
-  //   }return false;
-  // }
-
-  // function onKeyDown(e){
-  //   if(compareVowel(e.key)){
-  //     e.preventDefault();}
-    
-  //   console.log(e.key);
-  // }
-
     function changeName(e){
 
       if(e.target.value == '' | e.target.value == '  '){e.preventDefault(); e.stopPropagation();}
       else{
-      fetch(`https://api.mercadolibre.com/sites/MLA/search?q=${e.target.value}`)
+        const db = getFirestore();
+        const itemColection = db.collection('items');
+        const itemFiltered = itemColection.where('title','in',e.target.value)
 
-      .then(response => {return response.json() })
-
-      .then(response => {
-            if(response.status=='404'){
-              setBandera(false);
-              props.updateData([]);
-            }else{
-              props.updateData(response.results)
-            }
-      })
+    itemFiltered.get()
+    .then((response) => {
+        if(response.size == 0 ){
+          setBandera(false);
+          props.updateData([]);
+          console.log("NO HAY DATA");
+        }
+        else{
+          props.updateData(response.docs.map( (doc) => {return({id:doc.id,...doc.data()});
+        }))
+        }
+     })
+     .catch ( (error) => {console.log("Algo fallo", error);} )
     }
       
     }

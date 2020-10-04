@@ -37,7 +37,7 @@ function CountryDetail(props) {
             else{
                 console.log("Item encontrado");
                 setDesc({id: doc.id, ...doc.data()});
-                console.log(desc);
+                console.log(doc.data());
             }
         })
         .catch ( (error) => {console.log("Algo fallo", error);} )
@@ -67,14 +67,13 @@ function CountryDetail(props) {
             <div className="content-CartList">
 
                     <div className="flag">
-                        <img src={desc.thumbnail}></img>
+                        <img src={desc.image}></img>
                     </div>
 
                     <div className="description-country">
-                        <h1>{desc.name}</h1>
+                        <h1>{desc.title}</h1>
                         <div className="info-country">
                             <div className="tags_info_countries">
-                                <p>Titulo: <span>{desc.title}</span></p>
                                 <p>Precio: $<span>{desc.price}</span></p>
                                 <p>Condicion: <span>{desc.condition}</span></p>
                                 <p>Stock: <span>{desc.stock}</span></p>

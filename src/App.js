@@ -26,9 +26,6 @@ function App() {
   useEffect( () => { 
         const db = getFirestore();
         const itemColection = db.collection('items');
-        // const data = fetch("https://api.mercadolibre.com/sites/MLA/search?category=MLA1055")
-        // resolve(data);
-        // console.log(data)
 
     itemColection.get()
     .then((response) => {
