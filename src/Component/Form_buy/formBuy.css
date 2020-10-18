@@ -1,0 +1,47 @@
+.flex{
+
+    display: flex;
+    flex-direction: row;
+    padding-top:10px;
+}
+.flex .datosPersonales{
+
+    display: flex;
+    flex-direction: column;
+}
+.flex .datosCompra{
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.flex input{
+    margin-top: 14px;
+    padding : 10px;
+}
+
+.conteinerForm{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.conteinerForm img{
+    max-width: 20%;
+    height: auto;
+}
+.conteinerForm .conteinerInfo .enviar{
+    margin-top:20px;
+    width: 80%;
+    height: 40px;
+    background: rgb(118, 185, 118);
+    border: 1 solid ;
+}
+.conteinerForm .conteinerInfo .cancelar{
+    margin-top:20px;
+    width: 80%;
+    height: 40px;
+    background: red;
+    border: 1 solid ;
+}

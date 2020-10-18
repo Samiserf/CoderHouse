@@ -1,0 +1,125 @@
+.conteiner-desc{
+    height: 100%;
+}
+
+.content-CartList{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.div-back{
+    padding-top: 60px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 90%;
+    height: 150px;
+    margin-left: 6%;
+}
+
+
+.content-CartList .flag{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+.content-CartList .flag img{
+    width: 80%;
+    height: 80%;
+}
+
+.content-CartList .description-product{
+    display: flex;
+    flex-direction: column;
+}
+
+.content-CartList .description-product .info-product{
+    display: flex;
+    text-align: left;
+    width: 100%;
+    height: 200px;
+}
+
+.content-CartList .description-product .info-product .tags_info_countries{
+    padding-right: 30%;
+}
+
+
+.content-CartList .description-product .around-countries{
+    display: flex;
+    padding-top: 40px;
+    justify-content: left;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.content-CartList .description-product .around-countries button{
+    
+    margin: 20px;
+}
+
+.content-CartList .description-product .around-countries p{
+    
+    /* padding: 20px; */
+}
+
+.content-CartList .description-product h1{
+    display: flex;
+    justify-content: left;
+}
+
+.content-CartList .description-product .around-countries .List-countries-around{
+    display: flex;
+    justify-content: unset;
+    flex-wrap: wrap;
+}
+
+
+
+@media(max-width: 800px) {
+
+    .conteiner-desc{
+        height: 100%;
+    }
+    
+    .content-CartList{
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-around; */
+        align-items: flex-start;
+    }
+    .content-CartList .flag{
+        width: 70%;
+        height: 300px;
+    }
+    .content-CartList .description-product h1 {
+        padding : 0;
+    }
+    .content-CartList .description-product {
+        padding-left: 10%;
+        padding-top:30px;
+    }
+
+    .content-CartList .description-product .info-product {
+        padding-top: 50px;
+        flex-direction: column;
+        display: flex;
+        text-align: left;
+        width: 100%;
+        height: 200px;
+    }
+
+    .content-CartList .description-product .around-countries {
+        padding:0;
+        padding-top:70px;
+        display: block;
+        text-align: left;
+    }
+
+    .content-CartList .description-product .around-countries .List-countries-around{
+        display: flex;
+
+    }
+ }
