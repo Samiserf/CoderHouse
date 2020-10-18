@@ -17,8 +17,15 @@ function ItemCart() {
   const [banderaCart, setBanderaCart] = useState(true);
 
 
-  function HandleIncrease(){
-    setCountItem(countItem+1)
+  function HandleIncrease(id){
+    if(cart[id].cantidad+1 <= cart[id].stock){
+      setCountItem(countItem+1)
+      cart[id].cantidad = cart[id].cantidad+1
+    }
+    else{
+      alert("No hay stockillo");
+    }
+    
   }
   function HandleDecrease(){
       setCountItem(countItem-1)
@@ -31,17 +38,16 @@ function ItemCart() {
 
   useEffect( () => {
     setCart(cart)
-    console.log("cart es" + cart)
   },[cart])
 
-console.log(cart)
-console.log(!cart)
-  if(!cart){
+console.log(cart == false)
+  if(cart== false){
     return <div className="container-loading"><h2>No hay items en tu carrito</h2></div>
   }else{
     return (
-
-      cart.map( (item, id) => 
+      <>
+      {cart.map( (item, id) => 
+      
         <div className="product-cart">
           <div className="info-left">
             <img src={item.image} alt="product"/>
@@ -52,26 +58,27 @@ console.log(!cart)
           </div>
           <div className="info-center">
             <div>
-              <button onClick={HandleDecrease}>-</button><span>{countItem}</span><button onClick={HandleIncrease}>+</button>
+              <button onClick={HandleDecrease}>-</button><span>{cart[id].cantidad}</span><button onClick={ (( ) => HandleIncrease(id))}>+</button>
             </div>
             <div className="info-center_right">
-              Subtotal: ${item.price * countItem}
+              Subtotal: ${item.price * cart[id].cantidad}
             </div>
           </div>
           
           <div className="info-right">
-            <h3>Subtotal: ${Math.round(item.price * countItem)}</h3>
-            <span>IVA 21%: ${Math.round(item.price * countItem * 0.21)}</span>
+            <h3>Subtotal: ${Math.round(item.price * cart[id].cantidad)}</h3>
+            <span>IVA 21%: ${Math.round(item.price * cart[id].cantidad * 0.21)}</span>
             <span>Envío: $100</span>
             <div className="line-cut"></div>
-            <h2>Total: ${Math.round(item.price * countItem * 1.21 + 100)}</h2>
+            <h2>Total: ${Math.round(item.price * cart[id].cantidad * 1.21 + 100)}</h2>
             <div className="final_buy">
-              <Link to="/cart/formBuy" className="buttonBuy">Comprar</Link>
               <button onClick={ () => deleteItem(id) }><i class="fa fa-trash"></i></button>
             </div>
           </div>
         </div>
-      )
+      )}
+      <Link to="/cart/formBuy" className="buttonBuy">Comprar</Link>
+      </>
     );
   }
   }

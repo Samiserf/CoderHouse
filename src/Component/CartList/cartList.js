@@ -9,7 +9,7 @@ import {getFirestore} from '../../Firebase/index';
 
 function CartList(props) {
 
-    
+    const cantidad = 1;
 
     const [cart,setCart] = useContext(CartContext);
 
@@ -27,7 +27,7 @@ function CartList(props) {
                 console.log("No existe el documento");
             }
             else{
-                setCart([...cart,{id: doc.id, ...doc.data()}]);
+                setCart([...cart,{id: doc.id, ...doc.data(), cantidad}]);
             }
         })
         .catch ( (error) => {console.log("Algo fallo", error);} )

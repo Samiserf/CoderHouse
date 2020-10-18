@@ -45,6 +45,7 @@ function FormBuy() {
                 datos.securityCode != null){
                     const db = getFirestore();
                     const order = db.collection("Ordenes");
+                    
                     cart.map( (itemCurrent,i) => {
                         const dataOrden = {
                             buyer:datos,
@@ -56,6 +57,11 @@ function FormBuy() {
                             banderaCart ?  setBanderaCart(false) : setBanderaCart(true);
                             console.log(cart);
                             alert("Se genero tu órden. Número de seguimiento: " + id);
+                        });
+
+                        const items = db.collection("items").doc(cart[i].id);
+                        var actualizarStock = items.update({
+                            stock : cart[i].stock - cart[i].cantidad
                         });
                     });
                 }
