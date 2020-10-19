@@ -8,13 +8,16 @@ button{
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
-    background: #4CAF50;
-    width: 100%;
+    background: #4CAF50 !important;
+    width: 50%;
     border: 0;
     padding: 15px;
+    margin: 20px 0 20px 0;
     color: #FFFFFF;
     font-size: 14px;
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
 }

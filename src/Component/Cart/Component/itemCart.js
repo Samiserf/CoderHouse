@@ -52,32 +52,32 @@ console.log(cart == false)
           <div className="info-left">
             <img src={item.image} alt="product"/>
             <div className="description">
-              <span className="link" href="#">{item.title}</span>
-              <span>Precio unitario: ${item.price}</span>
+              <p href="#">{item.title}</p>
             </div>
           </div>
           <div className="info-center">
-            <div>
-              <button onClick={HandleDecrease}>-</button><span>{cart[id].cantidad}</span><button onClick={ (( ) => HandleIncrease(id))}>+</button>
-            </div>
-            <div className="info-center_right">
-              Subtotal: ${item.price * cart[id].cantidad}
+            <div className="counter">
+              <button className="signCounter" onClick={HandleDecrease}>-</button><span>{cart[id].cantidad}</span><button className="signCounter" onClick={ (( ) => HandleIncrease(id))}>+</button>
             </div>
           </div>
           
           <div className="info-right">
-            <h3>Subtotal: ${Math.round(item.price * cart[id].cantidad)}</h3>
-            <span>IVA 21%: ${Math.round(item.price * cart[id].cantidad * 0.21)}</span>
-            <span>Envío: $100</span>
-            <div className="line-cut"></div>
-            <h2>Total: ${Math.round(item.price * cart[id].cantidad * 1.21 + 100)}</h2>
-            <div className="final_buy">
-              <button onClick={ () => deleteItem(id) }><i class="fa fa-trash"></i></button>
-            </div>
+            <h3>Precio: ${Math.round(item.price * cart[id].cantidad)}</h3>
+            <button className="delete" onClick={ () => deleteItem(id) }><i class="fa fa-trash"></i></button>
           </div>
         </div>
       )}
-      <Link to="/cart/formBuy" className="buttonBuy">Comprar</Link>
+      <div className="final">
+        <div>
+          <span>Subtotal:</span>  $100 <br/>
+          <span>Envío estimado</span> 21%
+          <div className="line-cut"></div>
+          <h3>Total: $2000</h3>
+          <Link to="/cart/formBuy" className="buttonBuy">Comprar ahora</Link>
+        </div>
+      
+      </div>
+      
       </>
     );
   }

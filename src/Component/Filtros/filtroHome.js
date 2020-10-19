@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './filtroHome.css';
 import NotFound from '../../images/3747371.jpg'
+import header from '../../images/header_03.jpg'
 import Input from '../Input/input'
 import {getFirestore} from '../../Firebase/index'
 
@@ -66,6 +67,7 @@ function FiltroHome(props) {
     }else{
     return (
       <div className="content-header">
+        <span id="filtrar">Filtrar</span>
             <div className="content-search">
               <Input changeName={changeName} />
             </div>

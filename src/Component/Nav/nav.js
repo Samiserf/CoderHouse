@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './nav.css';
 import {CartContext} from '../../Context/CartContext'
+import logo from '../../images/LOGO_lettos.png'
 import {
   BrowserRouter as Router,
   Switch,
@@ -35,7 +36,8 @@ function NavBar(props) {
     return (
       <div className={shadow ? "shadow" : "NavBar"}>
 
-        <NavLink to="/"><h1>Ecommerce</h1></NavLink>
+        <NavLink to="/"><h1><img src={logo} alt="logo"/></h1></NavLink>
+        
         <NavLink className="carrito-fafa" to="/cart"><i class="fa fa-shopping-cart"><sup>{cart.length}</sup></i></NavLink>
 
         <button onClick={props.changeTheme}><i class="fa fa-moon-o" aria-hidden="true"></i> Black mode</button>

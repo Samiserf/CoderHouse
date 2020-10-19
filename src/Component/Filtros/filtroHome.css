@@ -1,8 +1,8 @@
 .content-header{
-    padding-top: 90px;
-    height: 100px;
+    padding: 50px 0 50px 0;
+    height: auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding-left: 50px;
     padding-right: 50px;
@@ -20,12 +20,14 @@
     padding: 14px;
 
 }
-
+#filtrar{
+    padding-right: 50px;
+}
 .content-search{
     display: flex;
     /* justify-content: center; */
     flex-direction: row;
-    width: 35%;
+    width: 25%;
     height: 35px;
     vertical-align: center;
 }

@@ -6,6 +6,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-direction: column;
 }
 .div-back{
     padding-top: 60px;

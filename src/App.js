@@ -5,6 +5,7 @@ import NavBar from './Component/Nav/nav'
 import FiltroHome from './Component/Filtros/filtroHome'
 import CartList from './Component/CartList/cartList'
 import ProductDetail from './Component/productDetail/productDetail'
+import Header from './Component/Header/header'
 import {
   BrowserRouter as Router,
   Switch,
