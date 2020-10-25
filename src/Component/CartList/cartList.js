@@ -5,38 +5,11 @@ import {
     Link, NavLink
   } from "react-router-dom";
 import {CartContext} from '../../Context/CartContext';
-import {getFirestore} from '../../Firebase/index';
 import Header from '.././Header/header'
 
 function CartList(props) {
 
-    const cantidad = 1;
-
-    const [cart,setCart] = useContext(CartContext);
-
-    function increaseCart(id){
-
-        const db = getFirestore();
-        const itemDoc = db.collection('items');
-        const itemColection = itemDoc.doc(id);
-        // const itemId = itemColection.where('{docs.id}', '==', 'nuevo');
-
-        itemColection.get()
-        .then((doc) => {
-            if(!doc.exists){
-
-                console.log("No existe el documento");
-            }
-            else{
-                setCart([...cart,{id: doc.id, ...doc.data(), cantidad}]);
-            }
-        })
-        .catch ( (error) => {console.log("Algo fallo", error);} )
-
-
-    }
-
-
+    const [cart,setCart,increaseCart] = useContext(CartContext);
 
     return (
         

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState , useContext } from 'react';
 import './productDetail.css';
 import {
     BrowserRouter as 
@@ -7,19 +7,20 @@ import {
 import Button from '../Button/button'
 import Loading from './../../images/loading.gif'
 import {getFirestore} from '../../Firebase/index'
-
+import {CartContext} from '../../Context/CartContext';
 
 
 function ProductDetail(props) {
+
+    const [cart,setCart,increaseCart] = useContext(CartContext);
 
     const [desc,setDesc] = useState([]);
     const [countItem,setCountItem] = useState(0);
     //state loading
     const [loading,setLoading] = useState(true);
+    const [existProduct,setExistProduct] = useState(true);
 
     let { id } = props.match.params;
-
-    
 
     useEffect( () => { 
         console.log(id);
@@ -33,6 +34,7 @@ function ProductDetail(props) {
             if(!doc.exists){
 
                 console.log("No existe el documento");
+                setExistProduct(false);
             }
             else{
                 console.log("Item encontrado");
@@ -56,51 +58,51 @@ function ProductDetail(props) {
 
     if(loading){
         return <div className="container-loading"><img src={Loading} className="loading"></img></div>
-      }else{
+    }
+    else{
+        if(existProduct == false){
+            return <div><h3>No existe el producto que desea ver.</h3></div>
+        }
+        else{
 
-    return (
+            return (
 
-        <div className="conteiner-desc">
-            <div className="div-back">
-                <Button path="" id="" text="< Back" />
-            </div>
-            <div className="content-CartList">
-
-                    <div className="flag">
-                        <img src={desc.image}></img>
+                <div className="conteiner-desc">
+                    <div className="div-back">
+                        <Button path="" id="" text="< Back" />
                     </div>
+                    <div className="content-CartList">
 
-                    <div className="description-product">
-                        <h1>{desc.title}</h1>
-                        <div className="info-product">
-                            <div className="tags_info_countries">
-                                <p>Precio: $<span>{desc.price}</span></p>
-                                <p>Condicion: <span>{desc.condition}</span></p>
-                                <p>Stock: <span>{desc.stock}</span></p>
+                            <div className="flag">
+                                <img src={desc.image}></img>
                             </div>
-                            <div>
-                                <p>Garantia: <span>{desc.garantia}</span></p>
-                                <p>Color: <span>{desc.color}</span></p>
-                                
+
+                            <div className="description-product">
+                                <h1>{desc.title}</h1>
+                                <div className="info-product">
+                                    <div className="tags_info_countries">
+                                        <p>Precio: $<span>{desc.price}</span></p>
+                                        <p>Condicion: <span>{desc.condition}</span></p>
+                                        <p>Stock: <span>{desc.stock}</span></p>
+                                    </div>
+                                    <div>
+                                        <p>Garantia: <span>{desc.garantia}</span></p>
+                                        <p>Color: <span>{desc.color}</span></p>
+                                        
+                                    </div>
+                                </div>
+                                <div className="around-countries">
+                                <button className="buttonBuy" onClick={() => increaseCart(id)}>
+                                    AGREGAR AL CARRITO
+                                </button>                            
+                                    
+                                </div>
                             </div>
-                        </div>
-                        <div className="around-countries">
-                        {/* <button onClick={HandleDecrease}>-</button><button>Comprar </button> <button onClick={HandleIncrease}>+</button> */}
-                        <button onClick={HandleDecrease}>-</button><button>Comprar <strong>{countItem}</strong></button> <button onClick={HandleIncrease}>+</button>
-                            {/* <p>Relacionados:</p>
-                            <div className="List-countries-around">
-                                {descBorder.map( (border,i) => (
-                                    <Button id={border} text={border} />
-                                    ) )}
-                                    TO DO
-                            </div> */}
-                            
-                        </div>
                     </div>
+                    
             </div>
-            
-      </div>
-    );
+            );
+        }
     }
   }
   

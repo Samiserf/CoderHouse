@@ -13,14 +13,15 @@ import {
 function FormBuy() {
 
     const[send,setSend] = useState(false);
-    const [cart,setCart] = useContext(CartContext);
+    const [cart,] = useContext(CartContext);
     const [processOrder,setProcessOrder] = useState(false);
     const [banderaCart, setBanderaCart] = useState(true);
 
     const[datos, setDatos] = useState({
         fullName: null, 
         phone: null, 
-        mail: null, 
+        mail: null,
+        verifyMail: null, 
         dir: null, 
         cp: null, 
         card: null, 
@@ -38,32 +39,39 @@ function FormBuy() {
             if(datos.fullName != null &&
                 datos.phone != null &&
                 datos.mail != null &&
+                datos.verifyMail != null &&
                 datos.dir != null &&
                 datos.cp != null &&
                 datos.card != null &&
                 datos.expireCart != null &&
-                datos.securityCode != null){
-                    const db = getFirestore();
-                    const order = db.collection("Ordenes");
-                    
-                    cart.map( (itemCurrent,i) => {
-                        const dataOrden = {
-                            buyer:datos,
-                            idItem: cart[i]
-                        }
-                        // Add a new document in collection
-                        order.add(dataOrden).then(({id}) => {
-                            cart.splice(0, 1);
-                            banderaCart ?  setBanderaCart(false) : setBanderaCart(true);
-                            console.log(cart);
-                            alert("Se genero tu órden. Número de seguimiento: " + id);
-                        });
+                datos.securityCode != null)
+                {
+                    if(datos.verifyMail !=  datos.mail){
+                        document.getElementById('verifyMail').innerHTML  = "Los campos de mail no coinciden.";
+                    }else{
+                        const db = getFirestore();
+                        const order = db.collection("Ordenes");
+                        var date = new Date();
+                        cart.map( (itemCurrent,i) => {
+                            const dataOrden = {
+                                buyer:datos,
+                                idItem: cart[i],
+                                fecha: date
+                            }
+                            // Add a new document in collection
+                            order.add(dataOrden).then(({id}) => {
+                                cart.splice(0, 1);
+                                banderaCart ?  setBanderaCart(false) : setBanderaCart(true);
+                                console.log(cart);
+                                alert("Se genero tu órden. Número de seguimiento: " + id + "\n con fecha :" + dataOrden.fecha);
+                            });
 
-                        const items = db.collection("items").doc(cart[i].id);
-                        var actualizarStock = items.update({
-                            stock : cart[i].stock - cart[i].cantidad
+                            const items = db.collection("items").doc(cart[i].id);
+                            var actualizarStock = items.update({
+                                stock : cart[i].stock - cart[i].cantidad
+                            });
                         });
-                    });
+                    }
                 }
         }, [send]);
 
@@ -86,6 +94,8 @@ function FormBuy() {
                             <DatosForm onChange={handleChange} type="text" placeholder="Nombre y apellido" datos={datos.fullName} send={send} setSend={setSend} name="fullName" />
                             <DatosForm onChange={handleChange} type="number" placeholder="Telefono de contacto" datos={datos.phone} send={send} setSend={setSend} name="phone"/>
                             <DatosForm onChange={handleChange} type="mail" placeholder="Ingresa tu email" datos={datos.mail} send={send} setSend={setSend} name="mail"/>
+                            <DatosForm onChange={handleChange} type="mail" placeholder="Ingresa nuevamente tu email" datos={datos.verifyMail} send={send} setSend={setSend} name="verifyMail"/>
+                            <span id="verifyMail"></span>
                             <DatosForm onChange={handleChange} type="text" placeholder="Domicilio" datos={datos.dir} send={send} setSend={setSend} name="dir"/>
                             <DatosForm onChange={handleChange} type="number" placeholder="Código postal" datos={datos.cp} send={send} setSend={setSend} name="cp"/>
                         </div>
