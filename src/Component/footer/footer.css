@@ -1,0 +1,35 @@
+.containerFooter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    vertical-align: center;
+    text-align: left;
+    padding: 30px 0 30px 0;
+    margin-top: 30px;
+    background: hsl(211, 27%, 15%);
+}
+.containerFooter .col-1{
+    display: flex;
+    flex-direction: column;
+}
+
+.containerFooter .col-2{
+    display: flex;
+    flex-direction: column;
+}
+
+.containerFooter ul{
+    list-style-type: none;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+.containerFooter ul li a{
+    text-decoration: none;
+    color: rgb(110, 110, 110);
+}
+
+.containerFooter ul li a:hover{
+    color: rgb(255, 255, 255);
+}

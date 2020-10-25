@@ -5,7 +5,6 @@ import {
     Link, NavLink
   } from "react-router-dom";
 import {CartContext} from '../../Context/CartContext';
-import Header from '.././Header/header'
 
 function CartList(props) {
 
@@ -14,9 +13,6 @@ function CartList(props) {
     return (
         
       <div className="content-CartList">
-            <div>
-             <Header />
-            </div>
             <div className="container">
                 <div className="grid-row">
                     {props.data.map( (item, index) =>

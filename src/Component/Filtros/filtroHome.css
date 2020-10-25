@@ -1,12 +1,9 @@
 .content-header{
-    padding: 50px 0 50px 0;
-    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 50px;
-    padding-right: 50px;
-    
+    padding-top: 100px;
+    padding-bottom: 40px;
 }
 
 .content-header input{
@@ -14,6 +11,7 @@
     height: 35px;
     border-radius: 6px;
     border:none;
+    margin: 0 20px 0 20px;
 }
 
 .content-header i{
@@ -22,14 +20,6 @@
 }
 #filtrar{
     padding-right: 50px;
-}
-.content-search{
-    display: flex;
-    /* justify-content: center; */
-    flex-direction: row;
-    width: 25%;
-    height: 35px;
-    vertical-align: center;
 }
 
 
@@ -46,21 +36,21 @@ img{
     height: 91vh;
 }
 
-
-@media(max-width: 500px) {
+@media(max-width: 900px) {
     .content-header{
         padding-top: 90px;
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         flex-direction: column;
-        transition : all 1s ease !important;
-    }
-
-    .content-search{
-        width: 80%;
+        justify-content: space-between;
         transition : all 1s ease !important;
     }
     .content-header select{
         transition : all 1s ease-in-out !important;
+    }
+    .content-header input{
+        width: 70%;
+        height: 35px;
+        margin: 0px auto;
     }
  }

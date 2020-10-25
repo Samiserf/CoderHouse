@@ -5,7 +5,6 @@ import NavBar from './Component/Nav/nav'
 import FiltroHome from './Component/Filtros/filtroHome'
 import CartList from './Component/CartList/cartList'
 import ProductDetail from './Component/productDetail/productDetail'
-import Header from './Component/Header/header'
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,6 +16,7 @@ import Loading from './images/loading.gif'
 import Cart from './Component/Cart/cart'
 import {getFirestore} from './Firebase/index'
 import FormBuy from './Component/Form_buy/formBuy'
+import Footer from './Component/footer/footer'
 
 function App() {
 
@@ -72,8 +72,8 @@ if(loading){
                   <Route exact path="/cart" component={Cart}/>
                   <Route exact path="/cart/formBuy" component={FormBuy}/>
                 </switch>
-          </CartProvider>  
-
+          </CartProvider>
+          <Footer />
         </Router>
       </div>
     );

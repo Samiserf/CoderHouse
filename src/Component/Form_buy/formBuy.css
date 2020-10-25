@@ -1,14 +1,14 @@
 .flex{
-
     display: flex;
     flex-direction: row;
-    padding-top:10px;
+    padding-top:70px;
 }
 .flex .datosPersonales{
 
     display: flex;
     flex-direction: column;
 }
+
 .flex .datosCompra{
     padding-left: 30px;
     display: flex;
@@ -18,6 +18,11 @@
 .flex input{
     margin-top: 14px;
     padding : 10px;
+    outline: none;
+    border: none;
+    max-width: 90% !important;
+    margin: 15px auto;
+    background: white !important;
 }
 
 .conteinerForm{
@@ -33,15 +38,53 @@
 }
 .conteinerForm .conteinerInfo .enviar{
     margin-top:20px;
-    width: 80%;
-    height: 40px;
-    background: rgb(118, 185, 118);
-    border: 1 solid ;
+    width: 40%;
+    padding: 5px;
+    background: rgb(110, 255, 110);
+    outline: none;
+    border: none;
+    margin-right: 30px;
 }
 .conteinerForm .conteinerInfo .cancelar{
     margin-top:20px;
-    width: 80%;
-    height: 40px;
-    background: red;
-    border: 1 solid ;
+    width: 40%;
+    padding: 10px;
+    background: rgb(255, 123, 123);
+    outline: none;
+    border: none;
+    color: black !important;
+}
+
+@media screen and (max-width: 900px){
+    .conteinerForm{
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        vertical-align: center;
+        justify-content: center;
+    }
+    .flex{
+        flex-direction: column;
+        max-width: 50%;
+        align-items: center;
+        margin: 0 auto;
+    }
+    .flex .datosCompra{
+        padding-left: 0px;
+    }
+    .conteinerForm img{
+        display: none;
+    }
+    .flex  input{
+        max-width: 60% !important;
+    }
+    .conteinerForm .conteinerInfo .enviar{
+        margin: 10px auto;
+    }
+    .container-buttons{
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+    }
 }

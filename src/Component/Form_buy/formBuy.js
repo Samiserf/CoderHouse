@@ -7,8 +7,9 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
   } from "react-router-dom";
+  import  { Redirect } from 'react-router-dom'
 
 function FormBuy() {
 
@@ -63,7 +64,12 @@ function FormBuy() {
                                 cart.splice(0, 1);
                                 banderaCart ?  setBanderaCart(false) : setBanderaCart(true);
                                 console.log(cart);
-                                alert("Se genero tu órden. Número de seguimiento: " + id + "\n con fecha :" + dataOrden.fecha);
+                                // alert("Se genero tu órden. Número de seguimiento: " + id + "con fecha :" + dataOrden.fecha);
+                                alert("Se genero tu órden. Número de seguimiento: " + id + "con fecha :" + dataOrden.fecha);
+
+                                window.location = '/';
+                                
+                                
                             });
 
                             const items = db.collection("items").doc(cart[i].id);
@@ -90,7 +96,7 @@ function FormBuy() {
                 <div className="conteinerInfo">
                     <div className="flex">
                         <div className="datosPersonales">
-                            <h2>Datos personales</h2>
+                            <h2 id="datosPersonales">Datos personales</h2>
                             <DatosForm onChange={handleChange} type="text" placeholder="Nombre y apellido" datos={datos.fullName} send={send} setSend={setSend} name="fullName" />
                             <DatosForm onChange={handleChange} type="number" placeholder="Telefono de contacto" datos={datos.phone} send={send} setSend={setSend} name="phone"/>
                             <DatosForm onChange={handleChange} type="mail" placeholder="Ingresa tu email" datos={datos.mail} send={send} setSend={setSend} name="mail"/>
@@ -102,13 +108,15 @@ function FormBuy() {
                         <div className="datosCompra">
                             <h2>Datos de la compra</h2>
                             <DatosForm onChange={handleChange} type="number" placeholder="Tarjeta NRO" datos={datos.card} send={send} setSend={setSend} name="card"/>
-                            <DatosForm onChange={handleChange} type="number" placeholder="Fecha vencimiento" datos={datos.expireCart} send={send} setSend={setSend} name="expireCart"/>
+                            <DatosForm onChange={handleChange} type="date" placeholder="Fecha vencimiento" datos={datos.expireCart} send={send} setSend={setSend} name="expireCart"/>
                             <DatosForm onChange={handleChange} type="number" placeholder="Código seguridad" datos={datos.securityCode} send={send} setSend={setSend} name="securityCode"/>
                         </div>
                     </div>
-
+                    <div className="container-buttons">
                     <input className="enviar" type="submit" value="Enviar" />
                     <Link to='/cart'><button className="cancelar">Cancelar</button></Link>
+                    </div>
+                    
                 </div>
             </form>
             <img src="https://cdn.pixabay.com/photo/2017/09/18/08/56/credit-card-2761073_960_720.png"></img>

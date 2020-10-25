@@ -15,6 +15,7 @@ function ItemCart() {
   const [countItem,setCountItem] = useState(1);
   const [cart,setCart] = useContext(CartContext);
   const [banderaCart, setBanderaCart] = useState(true);
+  let sumaPrices = 0;
 
 
   function HandleIncrease(id){
@@ -25,10 +26,12 @@ function ItemCart() {
     else{
       alert("No hay stockillo");
     }
+    banderaCart ?  setBanderaCart(false) : setBanderaCart(true);
     
   }
   function HandleDecrease(){
       setCountItem(countItem-1)
+
   }
 
   function deleteItem(id){
@@ -38,7 +41,18 @@ function ItemCart() {
 
   useEffect( () => {
     setCart(cart)
+
+    console.log(cart);
+    
   },[cart])
+
+  // useEffect( () => {
+
+  //   cart.forEach(product => sumaPrices = (parseInt(sumaPrices) + parseInt(product.price)) * product.cantidad );
+
+  //   console.log(sumaPrices);
+    
+  // },[countItem])
 
 console.log(cart == false)
   if(cart== false){
@@ -69,11 +83,15 @@ console.log(cart == false)
       )}
       <div className="final">
         <div>
-          <span>Subtotal:</span>  $100 <br/>
-          <span>Envío estimado</span> 21%
+          <span>IVA:</span> 21% <br/>
+          <span>Envío estimado</span> $100
           <div className="line-cut"></div>
-          <h3>Total: $2000</h3>
+          {
+            cart.forEach(product => sumaPrices = (parseInt(sumaPrices) + parseInt(product.price)) * product.cantidad )
+          }
+          <h3>Precio: ${(Math.round(sumaPrices)*1.21) + 100}</h3>
           <Link to="/cart/formBuy" className="buttonBuy">Comprar ahora</Link>
+          
         </div>
       
       </div>

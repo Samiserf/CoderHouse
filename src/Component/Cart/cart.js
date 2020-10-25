@@ -14,7 +14,6 @@ function Cart() {
           <div className="bg">
                 
                 <div className="container-cart">
-                  <h2>Carrito de Compras</h2>
                   <ItemCart/>
                   {/* <FormBuy /> */}
                 </div>
