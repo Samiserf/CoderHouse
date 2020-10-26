@@ -48,7 +48,7 @@ function FiltroHome(props) {
                 <option value="">Todo</option>
                 <option value="phones">Celulares</option>
                 <option value="headphones">Auriculares Gamer</option>
-                
+                <option value="notebook">Notebooks</option>
             </select>
         
       </div>
