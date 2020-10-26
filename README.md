@@ -20,4 +20,4 @@ Anything deployed to PROD branch, `/src` folder, will be deployed automatically 
 
 To know the usability, please go to `/docs/filettoLucio_ecommerce.gif`. 
 
-![Alt Text](`/docs/filettoLucio_ecommerce.gif`)
+![Alt Text](/docs/filettoLucio_ecommerce.gif)
