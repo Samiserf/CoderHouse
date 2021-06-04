@@ -8,10 +8,15 @@ This is a ecommerce page for 'CoderHouse' course.
 - **Prod**: https://github.com/Samiserf/CoderHouse
 
 ## CONTACT
+
 - Lucio Filetto
     - Development
     - coderHouse
     - filettolucio@gmail.com
+
+- Marco Filetto
+    - Development
+    - marcoarielf96@gmail.com
 
 ## AUTOMATIC DEPLOY
 New work must be done on a new feature branch or in the master branch.
